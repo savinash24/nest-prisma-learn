@@ -1,19 +1,20 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req } from '@nestjs/common';
 import { UserService } from './user.service';
+import { Request } from 'express';
 
 @Controller('user')
 export class UserController {
   constructor(private userService: UserService) {}
 
   @Post()
-  async createUser(@Body() payload: any): Promise<any> {
+  async createUser(@Req() req: Request, @Body() payload: any): Promise<any> {
     console.log({ payload });
 
-    return this.userService.createUser(payload);
+    return this.userService.createUser(req, payload);
   }
 
   @Get()
-  async getAllUsers() {
-    return this.userService.getAllUsers();
+  async getAllUsers(@Req() req: Request) {
+    return this.userService.getAllUsers(req);
   }
 }
