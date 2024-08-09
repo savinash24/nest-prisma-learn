@@ -14,7 +14,7 @@ export class UserController {
   }
 
   @Get()
-  async getAllUsers(@Req() req: Request) {
+  async getAllUsers(@Req() req: Request): Promise<any> {
     return this.userService.getAllUsers(req);
   }
 }
