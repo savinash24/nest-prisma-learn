@@ -11,8 +11,13 @@ export class UserService {
     // return [];
   }
   async getAllUsers(request: any) {
-    // console.log({ query });
-
     return await request.prisma.user.findMany();
+  }
+
+  async createMultipleUsers(request: any, data) {
+    return await request.prisma.user.createMany({
+      data: data,
+      skipDuplicates: true,
+    });
   }
 }
